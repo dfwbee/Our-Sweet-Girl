@@ -113,7 +113,7 @@ WALL_PHOTOS.forEach(p=>{
   div.className = 'wpolaroid';
 const thumb = p.img ? `<img class="ph-fill" src="${p.img}">` : `<div class="ph-fill"></div>`;
 div.innerHTML = `<div class="wtape"></div>${thumb}<div class="wcap">${p.cap}</div>`;
-div.addEventListener('click', ()=>{
+  div.addEventListener('click', ()=>{
     const media = document.getElementById('lightboxMedia');
     if(p.video){
       media.innerHTML = `<video src="${p.video}" controls autoplay style="width:100%;border-radius:6px;"></video>`;
