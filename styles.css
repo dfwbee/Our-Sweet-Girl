@@ -1109,4 +1109,31 @@ footer {
     letter-spacing: .04em;
 }
 
-/* particles handled via canvas */
+@media(max-width:600px){
+  section{padding:70px 0;}
+  .container{padding:0 18px;}
+
+  .hero{padding:90px 20px 60px;}
+  .polaroid{width:min(260px,80vw);}
+
+  .you-strip{gap:10px;}
+  .you-pill{padding:11px 18px;font-size:15px;}
+
+  .timeline{padding-left:22px;}
+  .t-item{padding-left:22px;padding-bottom:48px;}
+
+  .wall{gap:26px 16px;}
+  .wpolaroid{width:150px;}
+
+  .msg-card{padding:26px 22px;}
+
+  .player{padding:24px;}
+  .player-top{gap:14px;}
+  .art{width:64px;height:64px;}
+
+  .things-grid{grid-template-columns:repeat(3,1fr);gap:10px;}
+  .thing{padding:10px;}
+  .thing .txt{font-size:13px;}
+
+  .collage-face{width:50px;height:50px;font-size:10px;}
+}
