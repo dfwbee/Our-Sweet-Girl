@@ -1109,31 +1109,103 @@ footer {
     letter-spacing: .04em;
 }
 
-@media(max-width:600px){
-  section{padding:70px 0;}
-  .container{padding:0 18px;}
+@media(max-width:600px) {
+    section {
+        padding: 70px 0;
+    }
 
-  .hero{padding:90px 20px 60px;}
-  .polaroid{width:min(260px,80vw);}
+    .container {
+        padding: 0 18px;
+    }
 
-  .you-strip{gap:10px;}
-  .you-pill{padding:11px 18px;font-size:15px;}
+    .hero {
+        padding: 90px 20px 60px;
+    }
 
-  .timeline{padding-left:22px;}
-  .t-item{padding-left:22px;padding-bottom:48px;}
+    .polaroid {
+        width: min(260px, 80vw);
+    }
 
-  .wall{gap:26px 16px;}
-  .wpolaroid{width:150px;}
+    .you-strip {
+        gap: 10px;
+    }
 
-  .msg-card{padding:26px 22px;}
+    .you-pill {
+        padding: 11px 18px;
+        font-size: 15px;
+    }
 
-  .player{padding:24px;}
-  .player-top{gap:14px;}
-  .art{width:64px;height:64px;}
+    .timeline {
+        padding-left: 22px;
+    }
 
-  .things-grid{grid-template-columns:repeat(3,1fr);gap:10px;}
-  .thing{padding:10px;}
-  .thing .txt{font-size:13px;}
+    .t-item {
+        padding-left: 22px;
+        padding-bottom: 48px;
+    }
 
-  .collage-face{width:50px;height:50px;font-size:10px;}
+    .wall {
+        gap: 26px 16px;
+    }
+
+    .wpolaroid {
+        width: 150px;
+    }
+
+    .msg-card {
+        padding: 26px 22px;
+    }
+
+    .player {
+        padding: 24px;
+    }
+
+    .player-top {
+        gap: 14px;
+    }
+
+    .art {
+        width: 64px;
+        height: 64px;
+    }
+
+    .things-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .thing {
+        padding: 10px;
+    }
+
+    .thing .txt {
+        font-size: 13px;
+    }
+
+    .collage-face {
+        width: 50px;
+        height: 50px;
+        font-size: 10px;
+    }
+}
+
+@media(max-width:600px) {
+    .wall {
+        gap: 20px 14px;
+    }
+
+    .wpolaroid {
+        width: calc(50% - 20px);
+        max-width: 160px;
+    }
+
+    .t-item img {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        aspect-ratio: 4/5;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-top: 12px;
+    }
 }
