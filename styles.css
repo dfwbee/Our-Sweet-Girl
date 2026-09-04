@@ -688,10 +688,12 @@ section {
 
 .msg-track {
     overflow: hidden;
+    transition: height .4s ease;
 }
 
 .msg-slides {
     display: flex;
+    align-items: flex-start;
     transition: transform .5s cubic-bezier(.6, .05, .2, 1);
 }
 
@@ -701,17 +703,15 @@ section {
     border-radius: 20px;
     background: linear-gradient(160deg, #0d1c4a, #0a1330);
     border: 1px solid rgba(159, 193, 255, .16);
-    height: 420px;
-    display: flex;
-    flex-direction: column;
 }
 
 .msg-body {
-    overflow-y: auto;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    padding-right: 6px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ice);
+    margin-top: 18px;
 }
 
 .msg-body::-webkit-scrollbar {
@@ -722,7 +722,7 @@ section {
     background: rgba(159, 193, 255, .3);
     border-radius: 10px;
 }
-}
+
 
 .msg-top {
     display: flex;
