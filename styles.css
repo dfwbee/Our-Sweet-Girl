@@ -1196,7 +1196,49 @@ footer {
     }
 
     .thing {
-        padding: 10px;
+        aspect-ratio: 1/1;
+        border-radius: 16px;
+        border: 1px solid rgba(159, 193, 255, .2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 14px;
+        cursor: pointer;
+        position: relative;
+        background: rgba(46, 107, 255, .05);
+        z-index: 1;
+    }
+
+    .thing .num {
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--soft-blue);
+        font-size: 15px;
+    }
+
+    .thing .txt {
+        font-family: var(--serif);
+        font-size: 15px;
+        margin-top: 8px;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity .3s ease, max-height .3s ease;
+    }
+
+    .thing.open {
+        aspect-ratio: auto;
+        min-height: 150px;
+        background: rgba(46, 107, 255, .18);
+        border-color: var(--glow);
+        z-index: 2;
+    }
+
+    .thing.open .txt {
+        opacity: 1;
+        max-height: 200px;
     }
 
     .thing .txt {
