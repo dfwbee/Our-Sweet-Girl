@@ -1547,6 +1547,15 @@ footer {
     margin-top: 8px;
 }
 
+.lock-hint {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--silver);
+    opacity: .75;
+    margin-top: 10px;
+    font-style: italic;
+}
+
 .lock-input {
     margin-top: 26px;
     width: 100%;
