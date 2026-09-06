@@ -236,3 +236,101 @@ COLLAGE_NAMES.forEach(n => {
   c.textContent = n;
   collage.appendChild(c);
 });
+/* ===== CAKE ===== */
+const CANDLE_COUNT = 23;
+const candlesRow = document.getElementById('candlesRow');
+for(let i=0;i<CANDLE_COUNT;i++){
+  const c = document.createElement('div');
+  c.className = 'candle';
+  c.innerHTML = `<div class="flame"></div>`;
+  c.style.animationDelay = (Math.random()*1.2)+'s';
+  candlesRow.appendChild(c);
+}
+
+const wishBtn = document.getElementById('wishBtn');
+const cakeWishText = document.getElementById('cakeWishText');
+const cakeReveal = document.getElementById('cakeReveal');
+
+function launchConfetti(count=120){
+  const colors = ['#9fc1ff','#2e6bff','#eaf1ff','#5aa9ff','#c7d5f0'];
+  for(let i=0;i<count;i++){
+    const piece = document.createElement('div');
+    piece.className='confetti-piece';
+    piece.style.left = Math.random()*100+'vw';
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.animation = `confettiFall ${2+Math.random()*1.5}s ease-in forwards`;
+    piece.style.animationDelay = (Math.random()*0.5)+'s';
+    document.body.appendChild(piece);
+    setTimeout(()=>piece.remove(), 4500);
+  }
+}
+
+const confettiStyle = document.createElement('style');
+confettiStyle.textContent = `@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(540deg);opacity:.9;}}`;
+document.head.appendChild(confettiStyle);
+
+wishBtn.addEventListener('click', ()=>{
+  document.querySelectorAll('.candle').forEach((c,i)=>{
+    setTimeout(()=> c.classList.add('blown'), i*40);
+  });
+  setTimeout(()=>{
+    launchConfetti();
+    cakeWishText.textContent = "HAPPY 23RD, SWEET GIRL! 💙🎂";
+    wishBtn.classList.add('hidden');
+    cakeReveal.classList.add('show');
+  }, CANDLE_COUNT*40 + 400);
+});
+
+/* ===== SECRET PAGE ===== */
+const SECRET_PASSWORD = "Omoge saida"; // change this to any 4-8 character password
+const secretOverlay = document.getElementById('secretOverlay');
+const lockCard = document.getElementById('lockCard');
+const secretContent = document.getElementById('secretContent');
+const lockInput = document.getElementById('lockInput');
+const lockMsg = document.getElementById('lockMsg');
+let heartInterval = null;
+
+document.getElementById('surpriseBtn').addEventListener('click', ()=>{
+  secretOverlay.classList.add('open');
+  lockCard.style.display='block';
+  secretContent.classList.remove('show');
+  lockInput.value='';
+  lockMsg.textContent='';
+  lockInput.focus();
+});
+
+document.getElementById('lockClose').addEventListener('click', ()=>{
+  secretOverlay.classList.remove('open');
+  if(heartInterval) clearInterval(heartInterval);
+});
+
+document.getElementById('lockSubmit').addEventListener('click', checkPassword);
+lockInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') checkPassword(); });
+
+function checkPassword(){
+  if(lockInput.value.trim().toUpperCase() === SECRET_PASSWORD.toUpperCase()){
+    lockMsg.textContent='';
+    lockCard.style.display='none';
+    secretContent.classList.add('show');
+    spawnFloatingHearts();
+  } else {
+    lockMsg.textContent = "Hmmmm… try again, Sweet Girl 👀";
+    lockCard.classList.add('shake');
+    setTimeout(()=> lockCard.classList.remove('shake'), 400);
+  }
+}
+
+function spawnFloatingHearts(){
+  const hearts = ['💙','✨','💫'];
+  heartInterval = setInterval(()=>{
+    if(!secretOverlay.classList.contains('open')){ clearInterval(heartInterval); return; }
+    const h = document.createElement('div');
+    h.className='floating-heart';
+    h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+    h.style.left = Math.random()*100+'%';
+    h.style.setProperty('--drift', (Math.random()*60-30)+'px');
+    h.style.animationDuration = (4+Math.random()*3)+'s';
+    secretContent.appendChild(h);
+    setTimeout(()=>h.remove(), 7000);
+  }, 500);
+}
