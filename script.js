@@ -70,6 +70,11 @@ document.getElementById('enterBtn').addEventListener('click', () => {
   draw();
 })();
 
+function getCurrentlyPlayingAudio(){
+  const candidates = [document.getElementById('birthdayMusic'), audio];
+  return candidates.find(a => a && !a.paused) || null;
+}
+let resumeAudioAfterVideo = null;
 // scroll reveal
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
@@ -100,6 +105,7 @@ document.querySelectorAll('.mcard').forEach(card => {
     const cat = card.dataset.cat;
     currentVids = MEMORY_VIDEOS[cat] || [];
     currentVidIndex = 0;
+    resumeAudioAfterVideo = getCurrentlyPlayingAudio();
     renderMemoryVideo();
     document.getElementById('lightboxCap').textContent = card.querySelector('h3').textContent;
     document.getElementById('lightbox').classList.add('open');
@@ -113,8 +119,16 @@ WALL_PHOTOS.forEach(p => {
   div.className = 'wpolaroid';
   const thumb = p.img ? `<img class="ph-fill" src="${p.img}">` : `<div class="ph-fill"></div>`;
   div.innerHTML = `<div class="wtape"></div>${thumb}<div class="wcap">${p.cap}</div>`;
-  div.addEventListener('click', () => {
-    document.getElementById('lightboxMedia').innerHTML = `<div class="ph-fill"></div>`;
+ div.addEventListener('click', () => {
+    const media = document.getElementById('lightboxMedia');
+    resumeAudioAfterVideo = p.video ? getCurrentlyPlayingAudio() : null;
+    if(p.video){
+      media.innerHTML = `<video src="${p.video}" controls autoplay style="width:100%;border-radius:6px;"></video>`;
+    } else if(p.img){
+      media.innerHTML = `<img src="${p.img}" style="width:100%;border-radius:6px;">`;
+    } else {
+      media.innerHTML = `<div class="ph-fill"></div>`;
+    }
     document.getElementById('lightboxCap').textContent = `${p.cap} — ${p.date}`;
     document.getElementById('lightbox').classList.add('open');
   });
@@ -122,13 +136,19 @@ WALL_PHOTOS.forEach(p => {
 });
 
 // lightbox close
-function closeLightbox() {
+function closeLightbox(){
   document.getElementById('lightbox').classList.remove('open');
   const vid = document.querySelector('#lightboxMedia video');
-  if (vid) vid.pause();
+  if(vid) vid.pause();
+  if(resumeAudioAfterVideo){
+    resumeAudioAfterVideo.play().catch(()=>{});
+    resumeAudioAfterVideo = null;
+  }
 }
-document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-document.getElementById('lightbox').addEventListener('click', (e) => { if (e.target.id === 'lightbox') closeLightbox(); });
+document.getElementById('lightboxClose').addEventListener('click',closeLightbox);
+document.getElementById('lightbox').addEventListener('click',(e)=>{
+  if(e.target.id === 'lightbox') closeLightbox();
+});
 
 // messages carousel
 const slides = document.getElementById('msgSlides');
