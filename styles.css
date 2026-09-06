@@ -1447,16 +1447,26 @@ footer {
 }
 
 .surprise-btn {
-    padding: 14px 30px;
+    padding: 16px 32px;
     border-radius: 100px;
     font-family: var(--script);
-    font-size: 19px;
-    color: var(--soft-blue);
-    border: 1px solid rgba(159, 193, 255, .4);
-    background: rgba(46, 107, 255, .08);
-    opacity: 0;
-    animation: riseIn 1s ease forwards;
-    animation-delay: .4s;
+    font-size: 20px;
+    color: var(--navy-deep);
+    background: linear-gradient(135deg, var(--soft-blue), var(--electric));
+    box-shadow: 0 0 24px rgba(90, 169, 255, .6);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 24px rgba(90, 169, 255, .6);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(90, 169, 255, .9);
+    }
 }
 
 .confetti-piece {
@@ -1669,4 +1679,15 @@ footer {
         transform: translateY(-500px) translateX(var(--drift, 20px));
         opacity: 0;
     }
+}
+
+.secret-block img,
+.secret-block video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+    margin-top: 12px;
+    object-fit: cover;
 }
